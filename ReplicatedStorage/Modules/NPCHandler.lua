@@ -248,7 +248,7 @@ function npc:Wander(...)
 		end
 		
 	else
-		
+		-- client then just lerp
 		local t = args[1]
 		
 		-- lerping npc model (GOJOOO) to current part position
@@ -309,3 +309,4 @@ function npc:Visible(client : boolean)
 end
 
 return npc
+
