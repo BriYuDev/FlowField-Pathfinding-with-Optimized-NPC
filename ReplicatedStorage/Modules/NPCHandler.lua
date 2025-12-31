@@ -1,9 +1,16 @@
 -- code by @CCG1234hello / lian_stillhere
 -- sorry bad english
 
+-- this module is creating a optimize npc object
+-- this npc is not using any humanoid or any default engine physics just pure math and raycast
+-- on the server it will calculate the main movement and for the client is just lerping the server side movement
+-- server side run in 12 hertz so its very efficient
+
+-- I will use this module for making npcs that follow the flowfield pathfinding algorithm in my example game
+
 local replicatedModules = script.Parent
+-- pathfinding algorithm module
 local pathfindingCalc = require(replicatedModules.PathfindingCalculator)
-local taskHandler = require(replicatedModules.TaskHandler)
 
 local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Include
@@ -252,7 +259,7 @@ function npc:Wander(...)
 		local t = args[1]
 		
 		-- lerping npc model (GOJOOO) to current part position
-		taskHandler:Spawn(function()
+		task.spawn(function()
 			while task.wait() do
 				
 				local modelCFrame = self.NPCModel.HumanoidRootPart.CFrame
@@ -309,4 +316,5 @@ function npc:Visible(client : boolean)
 end
 
 return npc
+
 
